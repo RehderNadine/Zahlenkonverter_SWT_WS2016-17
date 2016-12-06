@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Zahlenkonverter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Kata&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">de.nadine.kata.zahlenkonverter</a> &gt; <span class="el_source">Zahlenkonverter.java</span></div><h1>Zahlenkonverter.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package de.nadine.kata.zahlenkonverter;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Nadine
+ */
+<span class="nc" id="L14">public class Zahlenkonverter {</span>
+<span class="fc" id="L15">    private static Scanner scanner = new Scanner(System.in);</span>
+<span class="fc" id="L16">    private static RoemischDezimal[] roemischDezimalArray = {</span>
+        new RoemischDezimal(&quot;M&quot;,1000),
+        new RoemischDezimal(&quot;CM&quot;,900),
+        new RoemischDezimal(&quot;D&quot;, 500),
+        new RoemischDezimal(&quot;CD&quot;, 400),
+        new RoemischDezimal(&quot;C&quot;, 100),
+        new RoemischDezimal(&quot;XC&quot;, 90),
+        new RoemischDezimal(&quot;L&quot;, 50),
+        new RoemischDezimal(&quot;XL&quot;, 40),
+        new RoemischDezimal(&quot;X&quot;, 10),
+        new RoemischDezimal(&quot;IX&quot;, 9),
+        new RoemischDezimal(&quot;V&quot;, 5),
+        new RoemischDezimal(&quot;IV&quot;, 4),
+        new RoemischDezimal(&quot;I&quot;, 1)
+    };
+    
+    public static void main(String argv[]) {
+<span class="nc" id="L33">            auswahlEntgegennehmen();</span>
+<span class="nc" id="L34">    }</span>
+ 
+    /**
+     * Methode zum Umrechnen einer Dezimalzahl in eine römische Zahl
+     * @param dezimalZahl
+     * @return 
+     */
+    public static String getRoemischeZahl(int dezimalZahl) {
+<span class="fc" id="L42">	String roemischeZahl = &quot;&quot;;</span>
+		
+<span class="fc bfc" id="L44" title="All 2 branches covered.">	for(int i = 0; i &lt; roemischDezimalArray.length; i++) {</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            while (dezimalZahl &gt;= roemischDezimalArray[i].getDezimal()) {</span>
+<span class="fc" id="L46">                dezimalZahl -= roemischDezimalArray[i].getDezimal();</span>
+<span class="fc" id="L47">		roemischeZahl += roemischDezimalArray[i].getRoemisch();</span>
+            }
+	}
+<span class="fc" id="L50">	return roemischeZahl;</span>
+        
+    }
+    /**
+     * Methode zum Umrechnen einer römischen Zahl in eine Dezimalzahl
+     * @param roemischeZahl
+     * @return 
+     */
+    public static int getDezimalZahl(String roemischeZahl) {
+<span class="fc" id="L59">        int dezimalZahl = 0;</span>
+       
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (int i = 0; i &lt; roemischDezimalArray.length; i++) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            while (roemischeZahl.indexOf(roemischDezimalArray[i].getRoemisch()) == 0) {</span>
+<span class="fc" id="L63">                dezimalZahl += roemischDezimalArray[i].getDezimal();</span>
+<span class="fc" id="L64">                roemischeZahl = roemischeZahl.replaceFirst(roemischDezimalArray[i].getRoemisch(), &quot;&quot;);</span>
+            }
+        }
+<span class="fc" id="L67">        return dezimalZahl;</span>
+    }
+
+    private static void auswahlEntgegennehmen() {
+<span class="nc" id="L71">        System.out.print(&quot;Wählen Sie die 1, um eine Dezimalzahl umzuwandeln oder die 2, um eine römische Zahl umzuwandeln! Eingabe: &quot;);</span>
+<span class="nc" id="L72">        String eingabe = scanner.nextLine();</span>
+<span class="nc" id="L73">        auswahlVerarbeiten(eingabe);</span>
+           
+<span class="nc" id="L75">    }</span>
+
+    private static void auswahlVerarbeiten(String eingabe) {
+<span class="nc bnc" id="L78" title="All 2 branches missed.">       if (&quot;1&quot;.equals(eingabe)){</span>
+<span class="nc" id="L79">            System.out.print(&quot;Bitte geben Sie die Dezimalzahl ein: &quot;);</span>
+<span class="nc" id="L80">            int dezimalZahl = scanner.nextInt();</span>
+<span class="nc" id="L81">             System.out.print(&quot;römische Zahl: &quot;+getRoemischeZahl(dezimalZahl));</span>
+<span class="nc" id="L82">        }</span>
+            
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        else if (&quot;2&quot;.equals(eingabe)){</span>
+<span class="nc" id="L85">            System.out.print(&quot;Bitte geben Sie die römische Zahl ein: &quot;);</span>
+<span class="nc" id="L86">            String roemischeZahl = scanner.nextLine().toUpperCase();</span>
+<span class="nc" id="L87">            System.out.print(&quot;Dezimalzahl: &quot; +getDezimalZahl(roemischeZahl));</span>
+            
+        }
+<span class="nc" id="L90">    }</span>
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
